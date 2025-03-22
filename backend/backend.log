@@ -1,0 +1,6 @@
+nohup: ignoring input
+
+> gameforumbackend@1.0.0 start
+> node server.js
+
+Server started on 0.0.0.0:3002

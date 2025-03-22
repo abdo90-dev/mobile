@@ -1,0 +1,19 @@
+nohup: ignoring input
+
+> gameforumapp@1.0.0 web
+> expo start --web
+
+env: load .env
+env: export RECAPTCHA_SITE_KEY API_URL DB_HOST DB_USER DB_PASSWORD DB_NAME PORT JWT_SECRET
+Starting project at /var/www/vhosts/kensou.fr/httpdocs/GameForumApp
+Starting Metro Bundler
+CommandError: It looks like you're trying to use TypeScript but don't have the required
+dependencies installed.
+
+Please install typescript@^5.3.3 by running:
+
+npx expo install typescript
+
+If you're not using TypeScript, please remove the TypeScript files from your
+project
+

@@ -1,0 +1,52 @@
+{
+  "expo": {
+    "name": "GameForumApp",
+    "slug": "GameForumApp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSUserNotificationUsageDescription": "Cette application utilise les notifications pour vous informer des réponses à vos posts et des mises à jour des topics suivis."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": [
+        "POST_NOTIFICATIONS",
+        "VIBRATE",
+        "WAKE_LOCK",
+        "FOREGROUND_SERVICE"
+      ],
+      "package": "com.anonymous.GameForumApp"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+ 
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "extra": {
+      "firebase": {
+        "projectId": "gameforumapp-f31c5"
+      },
+      "eas": {
+        "projectId": "869d6df2-7bc8-4e04-ba35-84428d2bc7b9"
+      }
+    }
+  }
+}

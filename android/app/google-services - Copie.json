@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "506036335813",
+    "project_id": "gameforumapp-aecef",
+    "storage_bucket": "gameforumapp-aecef.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506036335813:android:cba0892ec247ff9d7decac",
+        "android_client_info": {
+          "package_name": "com.localdev.gameforumapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM0XzLH094todk5ZMdysBfDNLiH8Jzbuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

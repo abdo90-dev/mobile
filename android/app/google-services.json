@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "603743911356",
+    "firebase_url": "https://gameforumapp-f31c5.firebaseio.com",
+    "project_id": "gameforumapp-f31c5",
+    "storage_bucket": "gameforumapp-f31c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:603743911356:android:698bf6e78c19333da3bfb9",
+        "android_client_info": {
+          "package_name": "com.anonymous.GameForumApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "603743911356-xxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnUxnI-vJDKxoRmgaDTuFfY31M0dP43-0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "603743911356-xxxxxxxxxxxxxxxxxx.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "analytics_service": {
+          "status": "ENABLED"
+        },
+        "cloud_messaging": {
+          "status": "ENABLED",
+          "apns_config": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

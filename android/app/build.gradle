@@ -1,0 +1,150 @@
+// Ajouter le plugin Google Services dans le buildscript
+buildscript {
+        ext {
+        kotlinVersion = '1.9.25'
+        buildToolsVersion = "33.0.0"
+        minSdkVersion = 21
+        compileSdkVersion = 33
+        targetSdkVersion = 33
+        ndkVersion = "23.1.7779620"
+        kotlinCompilerExtensionVersion = "1.5.15"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.0.2'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.25'
+        classpath 'com.google.gms:google-services:4.4.2' // Plugin Google Services pour Firebase
+    }
+}
+allprojects {
+    configurations.all {
+        resolutionStrategy {
+            force "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+            force "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlinVersion"
+            force "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+            force "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
+        }
+
+    }
+}
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+apply plugin: "com.google.gms.google-services" // Plugin Google Services pour Firebase
+
+def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
+
+react {
+    entryFile = file(["node", "-e", "require('expo/scripts/resolveAppEntry')", projectRoot, "android", "absolute"].execute(null, rootDir).text.trim())
+    reactNativeDir = new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim()).getParentFile().getAbsoluteFile()
+    hermesCommand = new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim()).getParentFile().getAbsolutePath() + "/sdks/hermesc/%OS-BIN%/hermesc"
+    codegenDir = new File(["node", "--print", "require.resolve('@react-native/codegen/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim()).getParentFile().getAbsoluteFile()
+
+    autolinkLibrariesWithApp()
+}
+
+def enableProguardInReleaseBuilds = (findProperty('android.enableProguardInReleaseBuilds') ?: false).toBoolean()
+def jscFlavor = 'org.webkit:android-jsc:+'
+
+android {
+    ndkVersion rootProject.ext.ndkVersion
+
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdk rootProject.ext.compileSdkVersion
+
+    namespace 'com.anonymous.GameForumApp'
+    defaultConfig {
+        applicationId 'com.anonymous.GameForumApp'
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+
+        // Firebase placeholders
+        manifestPlaceholders = [
+            firebase_messaging_auto_init_enabled: "true",
+            firebase_analytics_collection_enabled: "true"
+        ]
+    }
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            signingConfig signingConfigs.debug
+            shrinkResources (findProperty('android.enableShrinkResourcesInReleaseBuilds')?.toBoolean() ?: false)
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            crunchPngs (findProperty('android.enablePngCrunchInReleaseBuilds')?.toBoolean() ?: true)
+        }
+    }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging (findProperty('expo.useLegacyPackaging')?.toBoolean() ?: false)
+        }
+    }
+    androidResources {
+        ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15" // Exemple, vérifie la compatibilité
+    }
+    dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.25" // Change this from 1.9.25 to 1.9.24
+}
+}
+
+["pickFirsts", "excludes", "merges", "doNotStrip"].each { prop ->
+    def options = (findProperty("android.packagingOptions.$prop") ?: "").split(",");
+    for (i in 0..<options.size()) options[i] = options[i].trim();
+    options -= ""
+
+    if (options.length > 0) {
+        println "android.packagingOptions.$prop += $options ($options.length)"
+        options.each {
+            android.packagingOptions[prop] += it
+        }
+    }
+}
+
+dependencies {
+    implementation("com.facebook.react:react-android")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.25"
+
+    def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
+    def isWebpEnabled = (findProperty('expo.webp.enabled') ?: "") == "true";
+    def isWebpAnimatedEnabled = (findProperty('expo.webp.animated') ?: "") == "true";
+
+    if (isGifEnabled) {
+        implementation("com.facebook.fresco:animated-gif:${reactAndroidLibs.versions.fresco.get()}")
+    }
+
+    if (isWebpEnabled) {
+        implementation("com.facebook.fresco:webpsupport:${reactAndroidLibs.versions.fresco.get()}")
+        if (isWebpAnimatedEnabled) {
+            implementation("com.facebook.fresco:animated-webp:${reactAndroidLibs.versions.fresco.get()}")
+        }
+    }
+
+    if (hermesEnabled.toBoolean()) {
+        implementation("com.facebook.react:hermes-android")
+    } else {
+        implementation jscFlavor
+    }
+
+    // Firebase dependencies
+    implementation platform("com.google.firebase:firebase-bom:33.7.0")
+    implementation "com.google.firebase:firebase-messaging"
+    implementation "com.google.firebase:firebase-analytics"
+}
