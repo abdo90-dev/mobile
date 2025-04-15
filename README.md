@@ -1,45 +1,43 @@
-GameForumApp
-GameForumApp is a full-stack mobile application built with React Native and powered by a Node.js backend with a MySQL database. This app provides a platform for users to engage in forum discussions centered around video games — including posting content, managing accounts, and more.
+# 📱 GameForumApp
 
-🛠 Technologies Used
-Frontend (Mobile App)
-React Native
+**GameForumApp** is a full-stack mobile application built with **React Native** and powered by a **Node.js backend** with a **MySQL database**.  
+This app provides a platform for users to engage in forum discussions centered around video games — including posting content, managing accounts, and more.
 
-JavaScript
+---
 
-Expo
+## 🛠 Technologies Used
 
-Context API for state management
+### Frontend (Mobile App)
+- **React Native**
+- **JavaScript**
+- **Expo**
+- **Context API**
 
-Backend
-Node.js
+### Backend
+- **Node.js**
+- **Express.js**
+- **MySQL**
+- **bcrypt**
+- **dotenv**
 
-Express.js
+### DevOps / Server
+- Deployed on a **VPS** (IONOS) with **Plesk**
+- MySQL database hosted on remote server
+- Deployment via **SFTP** and **CLI**
 
-MySQL for data storage
+---
 
-bcrypt for password hashing
+## ✅ Features
+- User registration and login
+- Secure authentication with bcrypt
+- Forum post creation and interaction
+- Real-time features
+- Beta-ready APK build for Android
 
-dotenv for environment variable management
+---
 
-DevOps / Server
-Deployed on a VPS (IONOS) with Plesk panel
+## 🚀 Getting Started
 
-Database hosted remotely via IONOS
-
-Built and deployed via CLI and SFTP access
-
-✅ Features
-User registration and login
-
-Secure authentication
-
-Forum creation and comment posting
-
-Real-time interactions
-
-Admin moderation panel (coming soon)
-
-Beta-ready APK build for Android
-
-
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/GameForumApp.git
