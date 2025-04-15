@@ -40,4 +40,4 @@ This app provides a platform for users to engage in forum discussions centered a
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/GameForumApp.git
+git clone https://github.com/abdo90-dev/mobile.git
